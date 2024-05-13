@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UITitleButtons : UI
+public class UITitleButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField]
     Transform buttonText;
@@ -27,26 +27,31 @@ public class UITitleButtons : UI
         textAnimator.speed = 0;
     }
 
-    protected override void Action(PointerEventData eventData, string EventName)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        switch(EventName)
-        {
-            case "Enter" :
-                leftEffect.gameObject.SetActive(true);
-                rightEffect.gameObject.SetActive(true);
-                break;
-            case "Exit":
-                leftEffect.gameObject.SetActive(false);
-                rightEffect.gameObject.SetActive(false);
-                break;
-            case "Click":
-                textAnimator.speed = 1;
-                textAnimator.Play("ButtonClick", -1, 0f);
-                break;
-            case "BeginDrag":
-                break;
-            case "EndDrag":
-                break;
-        }
+        leftEffect.gameObject.SetActive(true);
+        rightEffect.gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        leftEffect.gameObject.SetActive(false);
+        rightEffect.gameObject.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        textAnimator.speed = 1;
+        textAnimator.Play("ButtonClick", -1, 0f);
+    }
+
+    public void GoWaitingRoom()
+    {
+        UIManager.Intance.SceneChange("WaitingRoom");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
