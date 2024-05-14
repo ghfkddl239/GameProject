@@ -12,6 +12,8 @@ namespace ObserverPattern
         [SerializeField] WaitingRoomTopButtonSubject subject;
         [SerializeField] Color hightlightText = Color.yellow;
         [SerializeField] Color nomalText = Color.white;
+        [SerializeField] GameObject mainView;
+        [SerializeField] bool mainViewButton = true;
 
         Text text;
         bool isSelected = false;
@@ -64,6 +66,10 @@ namespace ObserverPattern
             subject.UpdateData();
             highlight.GetComponent<Image>().enabled = true;
             text.color = hightlightText;
+            if (mainViewButton)
+            {
+                UIManager.Intance.WaitingRoomMainView(mainView.name);
+            }
         }
     }
 
