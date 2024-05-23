@@ -341,13 +341,9 @@
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.2/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.2/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.2/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
--r:"Library/Bee/artifacts/1900b0aE.dag/AlaslTools.Editor.ref.dll"
--r:"Library/Bee/artifacts/1900b0aE.dag/AlaslTools.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Autodesk.Fbx.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Autodesk.Fbx.ref.dll"
--r:"Library/Bee/artifacts/1900b0aE.dag/AutoLevel.Editor.ref.dll"
--r:"Library/Bee/artifacts/1900b0aE.dag/AutoLevel.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Cinemachine.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/com.unity.cinemachine.editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PPv2URPConverters.ref.dll"
@@ -399,6 +395,7 @@
 -analyzer:"E:/Unity_A_JHY/Unity/Unity 2022.3.22f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"E:/Unity_A_JHY/Unity/Unity 2022.3.22f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/DownloadAssets/Blink/Art/Characters/LowPoly/Editor/MaterialTilingOffset.cs"
+"Assets/DownloadAssets/LevelGenerator/Scripts/Editor/LevelEditor.cs"
 "Assets/DownloadAssets/SlimUI/Editor/SlimUIWindow.cs"
 -langversion:9.0
 
