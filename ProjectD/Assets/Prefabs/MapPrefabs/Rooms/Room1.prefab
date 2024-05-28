@@ -689,9 +689,9 @@ GameObject:
   - component: {fileID: 1968190493163757692}
   - component: {fileID: 4839929813931614763}
   - component: {fileID: 5271898959684535605}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1101,6 +1101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6960226645746114053}
   - component: {fileID: 7942451167121542336}
+  - component: {fileID: 3660736288666700348}
   m_Layer: 0
   m_Name: Room1
   m_TagString: Untagged
@@ -1154,6 +1155,18 @@ MonoBehaviour:
   Exits: {fileID: 701842654252838874}
   Bounds: {fileID: 1648997019149768168}
   DeadEndChance: 10
+--- !u!114 &3660736288666700348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3239412410012892053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327b8fd49091c174c98d6f2177c46eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3248084129580904486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,9 +2355,9 @@ GameObject:
   - component: {fileID: 2813572893742281861}
   - component: {fileID: 8347203106354708036}
   - component: {fileID: 1094497750449519512}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_0
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2609,9 +2622,9 @@ GameObject:
   - component: {fileID: 226491430360948814}
   - component: {fileID: 5384016797503103976}
   - component: {fileID: 4732277655319470815}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2692,9 +2705,9 @@ GameObject:
   - component: {fileID: 9091245149506207277}
   - component: {fileID: 7123096637248936954}
   - component: {fileID: 8555396725428807954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

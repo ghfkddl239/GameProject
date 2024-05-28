@@ -30,7 +30,8 @@ namespace ObserverPattern
         {
             foreach (IObserver observer in _observers)
             {
-                observer.UpdateData(false);
+                // ÀÎ¼ö 0 = false, 1 = true
+                observer.UpdateData(0);
             }
         }
         public void UpdateData()

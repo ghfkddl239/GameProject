@@ -366,9 +366,9 @@ GameObject:
   - component: {fileID: 7426429903072567616}
   - component: {fileID: 2999637306936779142}
   - component: {fileID: 9096124685543777043}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_0
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -660,6 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2395453490967698555}
   - component: {fileID: 8791279921231996094}
+  - component: {fileID: 7819590470199690316}
   m_Layer: 0
   m_Name: Corridor1
   m_TagString: Untagged
@@ -711,6 +712,18 @@ MonoBehaviour:
   Exits: {fileID: 5069372368594660973}
   Bounds: {fileID: 8423831183300152902}
   DeadEndChance: 0
+--- !u!114 &7819590470199690316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612786227487202271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327b8fd49091c174c98d6f2177c46eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5127611606445474880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,9 +1218,9 @@ GameObject:
   - component: {fileID: 7858455096980313807}
   - component: {fileID: 3503527829365960772}
   - component: {fileID: 658354185043211937}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1607,9 +1620,9 @@ GameObject:
   - component: {fileID: 1066582433662004500}
   - component: {fileID: 319843396850464582}
   - component: {fileID: 1276681605054595272}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

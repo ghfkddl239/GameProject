@@ -9,6 +9,6 @@ namespace ObserverPattern
 
     public interface IObserver
     {
-        void UpdateData(bool isSelected);
+        void UpdateData(int state);
     }
 }
