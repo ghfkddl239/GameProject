@@ -47,7 +47,7 @@ public class UITitleButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void GoWaitingRoom()
     {
-        UIManager.Intance.SceneChange("WaitingRoom");
+        LoadingSceneManager.LoadScene("WaitingRoom");
     }
 
     public void ExitGame()

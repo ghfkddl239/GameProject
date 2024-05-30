@@ -3,40 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class UIManager : SingleTon<UIManager>
 {
-    [SerializeField]
-    List<GameObject> mainViewList;
+    List<GameObject> mainViewList = new List<GameObject>();
 
-    private static UIManager _instance;
-    private string WaitingRoomViewName = "";
-
-    private void Awake()
-    {
-        if (_instance is null)
-        {
-            _instance = this;
-        }    
-        else
-        {
-            _instance = null;
-        }
-    }
-
-    public static UIManager Intance
-    {
-        get
-        {
-            if (_instance is null)
-            {
-                return null;
-            }
-            else
-            {
-                return _instance;
-            }
-        }
-    }
+    private static string WaitingRoomViewName = "";
 
     // Start is called before the first frame update
     void Start()
@@ -50,11 +21,6 @@ public class UIManager : MonoBehaviour
         
     }
     
-    public void SceneChange(string sceneName)
-    {
-        SceneManager.LoadScene("Scenes/" + sceneName);
-    }
-
     public void WaitingRoomMainView(string viewName = "")
     {
         WaitingRoomViewName = viewName;
@@ -70,5 +36,20 @@ public class UIManager : MonoBehaviour
                 mainView.SetActive(true);
             }
         }
+    }
+
+    public void RegisterMainView(GameObject mainView)
+    {
+        mainViewList.Add(mainView);
+    }
+
+    public int MainViewCount()
+    {
+        return mainViewList.Count;
+    }
+
+    public void ResetMainView()
+    {
+        mainViewList.Clear();
     }
 }

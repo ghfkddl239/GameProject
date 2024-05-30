@@ -76,7 +76,7 @@ namespace ObserverPattern
             text.color = hightlightText;
             if (mainViewButton)
             {
-                UIManager.Intance.WaitingRoomMainView(mainView.name);
+                UIManager.Instance.WaitingRoomMainView(mainView.name);
             }
         }
     }

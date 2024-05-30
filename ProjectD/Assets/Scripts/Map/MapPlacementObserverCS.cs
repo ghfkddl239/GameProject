@@ -6,14 +6,24 @@ using ObserverPattern;
 public class MapPlacementObserverCS : MonoBehaviour, IObserver
 {
     MapPlacementSubjectCS subject;
-    private enum mapRole
+    private Vector3 parentPos = Vector3.zero;
+    public enum MapRole
     {
         NOMAL,
         PLAYERSPAWN,
         EXIT
     }
 
-    private mapRole _curRole;
+    private MapRole _curRole = MapRole.NOMAL;
+
+    public MapRole curRole
+    {
+        get
+        {
+            return _curRole;
+        }
+    }
+    private bool drawGizmo = false;
 
     void Awake()
     {
@@ -31,7 +41,8 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
     // Start is called before the first frame update
     void Start()
     {
-        
+        drawGizmo = subject.IsDebuged();
+        parentPos = transform.parent.position;
     }
 
     // Update is called once per frame
@@ -39,15 +50,30 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
     {
 
     }
-    public void UpdateData(int state)
+    public void UpdateData(int step)
     {
-        //if (0 == state) subject.UpdateData(0);
-        subject.UpdateData(CheckDistance());
+        // step
+        //  0 = playerSpawnCheck && exitCheck,
+        //  1 = player && objSpawn
+        switch (step)
+        {
+            case 0:
+                CheckDistance();
+                subject.UpdateData();
+                break;
+            case 1:
+                SpawnObj();
+                subject.UpdateData();
+                break;
+            case 2:
+                break;
+        }
+
     }
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 prentPos = transform.parent.position;
+        if (!drawGizmo) return;
         Vector3 pos = transform.position;
         Vector3 debugPos = pos;
         Transform debug = transform.Find("Bounds").GetChild(0);
@@ -63,7 +89,7 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
             }
         }
 
-        float distance = Vector2.Distance(new Vector2(pos.x, pos.z), new Vector2(prentPos.x, prentPos.z));
+        float distance = Vector2.Distance(new Vector2(pos.x, pos.z), new Vector2(parentPos.x, parentPos.z));
 
         if (150 < distance)
         {
@@ -77,23 +103,38 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
         }
     }
 
-    private int CheckDistance()
+    private void CheckDistance()
     {
-        // placementType 0 = Nomal, 1 = PlaterSpawnRoom, 2 = ExitRoom
-        int placementType = 0;
-        Vector3 prentPos = transform.parent.position;
         Vector3 pos = transform.position;
-        float distance = Vector2.Distance(new Vector2(pos.x, pos.z), new Vector2(prentPos.x, prentPos.z));
+        float distance = Vector2.Distance(new Vector2(pos.x, pos.z), new Vector2(parentPos.x, parentPos.z));
 
         if (150 < distance)
         {
-            placementType = 2;
+            _curRole = MapRole.EXIT;
         }
         else if (30 > distance)
         {
-            placementType = 1;
+            _curRole = MapRole.PLAYERSPAWN;
         }
+    }
 
-        return placementType;
+    private void SpawnObj()
+    {
+        //print("아이템 생성");
+        print("아이템 생성");
+
+        switch (_curRole)
+        {
+            case MapRole.NOMAL:
+                //print("몹 생성");
+                break;
+            case MapRole.PLAYERSPAWN:
+                //print("플레이어 스폰 지점 생성");
+                break;
+            case MapRole.EXIT:
+                //print("나가는 장소 생성");
+                //print("몹 생성");
+                break;
+        }
     }
 }

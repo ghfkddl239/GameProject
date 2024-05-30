@@ -296,7 +296,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5505790343709626015}
   - component: {fileID: 137711904114899240}
-  - component: {fileID: 4107886254378054700}
   m_Layer: 0
   m_Name: DeadEnd3
   m_TagString: Untagged
@@ -335,15 +334,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bounds: {fileID: 4893527911842444578}
---- !u!114 &4107886254378054700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9213896031646487345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327b8fd49091c174c98d6f2177c46eec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
