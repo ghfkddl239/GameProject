@@ -414,6 +414,7 @@
 "Assets/Scripts/LoadingSceneManager.cs"
 "Assets/Scripts/Managers/MapManager.cs"
 "Assets/Scripts/Managers/UIManager.cs"
+"Assets/Scripts/Map/ItemSpawnObserver.cs"
 "Assets/Scripts/Map/MapPlacementObserverCS.cs"
 "Assets/Scripts/Map/MapPlacementSubjectCS.cs"
 "Assets/Scripts/MeshTest.cs"
