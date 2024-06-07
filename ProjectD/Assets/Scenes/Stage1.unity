@@ -198,6 +198,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8c060ac35abf94499e19fda84b0863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpawnRound: 50
+  exitSpawnRound: 150
+  player: {fileID: 7938647559243552545, guid: 18272def5507bad4b9e352a39c183a57, type: 3}
+  boxSize: {x: 0.4, y: 1, z: 0.4}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
   drawGizmo: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
