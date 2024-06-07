@@ -7,6 +7,7 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
 {
     MapPlacementSubjectCS subject;
     private Vector3 parentPos = Vector3.zero;
+
     public enum MapRole
     {
         NOMAL,
@@ -107,12 +108,14 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
     {
         Vector3 pos = transform.position;
         float distance = Vector2.Distance(new Vector2(pos.x, pos.z), new Vector2(parentPos.x, parentPos.z));
+        float exitSpawnRound = subject.exitSpawnRound;
+        float playerSpawnRound = subject.playerSpawnRound;
 
-        if (150 < distance)
+        if (exitSpawnRound < distance)
         {
             _curRole = MapRole.EXIT;
         }
-        else if (30 > distance)
+        else if (playerSpawnRound > distance)
         {
             _curRole = MapRole.PLAYERSPAWN;
         }
