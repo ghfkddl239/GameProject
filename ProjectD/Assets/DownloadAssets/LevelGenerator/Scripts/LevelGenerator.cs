@@ -49,6 +49,9 @@ namespace LevelGenerator.Scripts
         /// </summary>
         public TagRule[] SpecialRules;
 
+        //custom
+        public GameObject door;
+
         protected List<Section> registeredSections = new List<Section>();
         
         public int LevelSize { get; private set; }
@@ -67,6 +70,8 @@ namespace LevelGenerator.Scripts
             
             CheckRuleIntegrity();
             LevelSize = MaxLevelSize;
+            //Custom
+            Instantiate(DeadEnds.PickOne(), Vector3.zero, Quaternion.identity);
             CreateInitialSection();
             DeactivateBounds();
         }
