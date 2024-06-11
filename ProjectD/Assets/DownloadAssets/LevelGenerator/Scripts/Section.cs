@@ -70,6 +70,8 @@ namespace LevelGenerator.Scripts
             if (LevelGenerator.IsSectionValid(candidate.Bounds, Bounds))
             {
                 candidate.Initialize(LevelGenerator, order);
+                //custom
+                if (RandomService.RollD100(50)) Instantiate(LevelGenerator.door, exit.position, exit.rotation, GameObject.Find("LevelGenerator").transform);
             }
             else
             {
