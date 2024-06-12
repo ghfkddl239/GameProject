@@ -410,6 +410,7 @@
 "Assets/Scripts/FirstPersonControllerCustom.cs"
 "Assets/Scripts/FSM.cs"
 "Assets/Scripts/IdleState.cs"
+"Assets/Scripts/InteractionCS.cs"
 "Assets/Scripts/Interfaces/IAction.cs"
 "Assets/Scripts/Interfaces/ICharacter.cs"
 "Assets/Scripts/Interfaces/OpserverPattern.cs"
