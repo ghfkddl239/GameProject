@@ -8,7 +8,7 @@ public class DoorActionCS : MonoBehaviour, IAction
     float nowDeg;
     float vector;
     bool isShow = false;
-    bool isOpen = false;
+    bool isOpen = true;
     float showTimer = 1;
 
     public float objSpeed; //원운동 속도
@@ -30,52 +30,62 @@ public class DoorActionCS : MonoBehaviour, IAction
 
     public void Action(Transform playerTr)
     {
+        Init(isOpen == false ? true : false);
         GetAngle(playerTr);
-        StartCoroutine(DoorOpenAndClose());
-    }
-
-    private IEnumerator DoorOpenAndClose()
-    {
-        yield return new WaitForFixedUpdate();
-        print(isOpen);
         if (isOpen)
         {
-            if (transform.localEulerAngles.y < 0)
-            {
-                nowDeg += objSpeed * Time.deltaTime;
-            }
-            else
-            {
-                nowDeg -= objSpeed * Time.deltaTime;
-            }
-            print("AAA / " + nowDeg);
-            transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
-
-            if (Mathf.Abs(transform.localEulerAngles.y) < 0.1f)
-            {
-                nowDeg = 0;
-                isOpen = false;
-            }
-            else
-            {
-                StartCoroutine(DoorOpenAndClose());
-            }
+            StartCoroutine(DoorClose());
         }
         else
         {
-            nowDeg += objSpeed * Time.deltaTime * vector;
-            print("BBB / " + nowDeg);
-            transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
-            if (Mathf.Abs(transform.localEulerAngles.y) > 89.9f)
-            {
-                nowDeg = 0f;
-                isOpen = true;
-            }
-            else
-            {
-                StartCoroutine(DoorOpenAndClose());
-            }
-            print(Mathf.Abs(transform.localEulerAngles.y));
+            StartCoroutine(DoorOpen());
+        }
+    }
+
+    private void Init(bool isOpen)
+    {
+        nowDeg = 0;
+        this.isOpen = isOpen;
+    }
+
+    private IEnumerator DoorClose()
+    {
+        if (!isOpen) yield break;
+        yield return new WaitForFixedUpdate();
+        if (transform.localRotation.y < 0)
+        {
+            nowDeg += objSpeed * Time.deltaTime;
+        }
+        else
+        {
+            nowDeg -= objSpeed * Time.deltaTime;
+        }
+        transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
+
+        if (Mathf.Abs(transform.localRotation.y) < Quaternion.Euler(0f, 1f, 0f).y)
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            StartCoroutine(DoorClose());
+        }
+    }
+
+    private IEnumerator DoorOpen()
+    {
+        if (isOpen) yield break;
+        yield return new WaitForFixedUpdate();
+
+        nowDeg += objSpeed * Time.deltaTime * vector;
+        transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
+        if (Mathf.Abs(transform.localRotation.y) > Quaternion.Euler(0f, 89f, 0f).y)
+        {
+            transform.localRotation = Quaternion.Euler(0f, 90.0f * vector, 0f);
+        }
+        else
+        {
+            StartCoroutine(DoorOpen());
         }
     }
 
@@ -108,16 +118,21 @@ public class DoorActionCS : MonoBehaviour, IAction
 
     public void GetAngle(Transform playerTr)
     {
-        Vector3 v1 = rotatePos.forward;
-        Vector3 v2 = rotatePos.position - playerTr.position;
+        Vector3 v1 = rotatePos.up;
+        Vector3 v2 = rotatePos.position - playerTr.position; //내적
 
-        Vector3 v = v2 - v1;
-        float angle = Mathf.Atan2(v.z, v.x) * Mathf.Rad2Deg;
-        if (angle < 0)
+        Vector3 v3 = Vector3.Cross(playerTr.position.normalized, rotatePos.position.normalized);
+        float angle = Vector3.Dot(v1, v2);
+
+        //float angle = Mathf.Atan2(v.z, v.x) * Mathf.Rad2Deg; //내적
+
+        print(v3);
+        print(angle);
+        if (angle >= 0)
         {
             vector = -1f;
         }
-        else if (angle >= 0)
+        else
         {
             vector = 1f;
         }
