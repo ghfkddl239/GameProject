@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ObserverPattern;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class MapPlacementSubjectCS : MonoBehaviour, Isubject
 {
@@ -128,7 +129,7 @@ public class MapPlacementSubjectCS : MonoBehaviour, Isubject
     }
     private void ResetMap()
     {
-        if (resetTest < 3)
+        if (resetTest < 5)
         {
             resetTest++;            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -143,17 +144,21 @@ public class MapPlacementSubjectCS : MonoBehaviour, Isubject
     {
         Vector3 playerSpawnPos = new Vector3();
         Vector3 spawnPos = new Vector3();
+        RaycastHit hit;
         bool isFit = false;
         int max = 0;
         while (!isFit)
         {
             spawnPos = transform.position + (Random.insideUnitSphere * playerSpawnRound);
             spawnPos.y = 4.0f;
-            print(spawnPos);
-            if (Physics.BoxCast(spawnPos, boxSize / 2, Vector3.down, transform.rotation, 10.0f, groundLayer))
+
+            if (Physics.BoxCast(spawnPos, boxSize / 2, Vector3.down, out hit, transform.rotation, 10.0f))
             {
-                playerSpawnPos = spawnPos;
-                isFit = true;
+                if ("Ground" == LayerMask.LayerToName(hit.collider.gameObject.layer) && spawnPos != Vector3.zero)
+                {
+                    playerSpawnPos = spawnPos;
+                    isFit = true;
+                }
             }
 
             if (max > 100)
@@ -163,26 +168,12 @@ public class MapPlacementSubjectCS : MonoBehaviour, Isubject
             }
             max++;
         }
-        playerSpawnPos.y = 0.1f;
+        playerSpawnPos.y = -1f;
 
+        print(playerSpawnPos);
         if (isFit) Instantiate(player, playerSpawnPos, Quaternion.identity);
     }
-
     /*
-    List<Vector3> poss = new List<Vector3>();
-
-    private void PlayerSpawn()
-    {
-        Vector3 playerSpawnPos = new Vector3();
-
-        for (int i = 0; i < 10; i++)
-        {
-            playerSpawnPos = transform.position + (Random.insideUnitSphere * playerSpawnRound);
-            playerSpawnPos.y = 4.0f;
-            poss.Add(playerSpawnPos);
-        }
-    }
-
     private void OnDrawGizmos()
     {
         if (!drawGizmo) return;

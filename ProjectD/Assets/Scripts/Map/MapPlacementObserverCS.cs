@@ -123,8 +123,6 @@ public class MapPlacementObserverCS : MonoBehaviour, IObserver
 
     private void SpawnObj()
     {
-        //print("아이템 생성");
-        print("아이템 생성");
 
         switch (_curRole)
         {

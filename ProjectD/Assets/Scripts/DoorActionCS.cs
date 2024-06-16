@@ -113,22 +113,18 @@ public class DoorActionCS : MonoBehaviour, IAction
         if (isShow)
         {
             StartCoroutine(ShowCheck());
-        }        
+        }
     }
 
     public void GetAngle(Transform playerTr)
     {
-        Vector3 v1 = rotatePos.up;
-        Vector3 v2 = rotatePos.position - playerTr.position; //내적
+        Vector3 v1 = transform.position - rotatePos.position;
+        Vector3 v2 = transform.position - playerTr.position;
 
-        Vector3 v3 = Vector3.Cross(playerTr.position.normalized, rotatePos.position.normalized);
-        float angle = Vector3.Dot(v1, v2);
+        float crossProduct = v1.x * v2.z - v1.z * v2.x;
 
-        //float angle = Mathf.Atan2(v.z, v.x) * Mathf.Rad2Deg; //내적
-
-        print(v3);
-        print(angle);
-        if (angle >= 0)
+        print(crossProduct);
+        if (crossProduct >= 0)
         {
             vector = -1f;
         }
