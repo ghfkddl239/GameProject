@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DoorActionCS : MonoBehaviour, IAction
 {
-    float deg; //°¢µµ
     float nowDeg;
     float vector;
     bool isShow = false;
@@ -15,12 +14,15 @@ public class DoorActionCS : MonoBehaviour, IAction
     public Transform rotatePos;
     public Material outlineHighlight;
 
+    private readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+    MeshRenderer meshRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        deg = 90.0f;
         nowDeg = 0f;
         vector = 1f;
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -50,42 +52,48 @@ public class DoorActionCS : MonoBehaviour, IAction
 
     private IEnumerator DoorClose()
     {
-        if (!isOpen) yield break;
-        yield return new WaitForFixedUpdate();
-        if (transform.localRotation.y < 0)
+        bool enter = true;
+        while (enter)
         {
-            nowDeg += objSpeed * Time.deltaTime;
-        }
-        else
-        {
-            nowDeg -= objSpeed * Time.deltaTime;
-        }
-        transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
+            yield return waitForFixedUpdate;
+            if (transform.localRotation.y < 0)
+            {
+                nowDeg += objSpeed * Time.deltaTime;
+            }
+            else
+            {
+                nowDeg -= objSpeed * Time.deltaTime;
+            }
 
-        if (Mathf.Abs(transform.localRotation.y) < Quaternion.Euler(0f, 1f, 0f).y)
-        {
-            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else
-        {
-            StartCoroutine(DoorClose());
+            transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
+
+            if (Mathf.Abs(transform.localRotation.y) < Quaternion.Euler(0f, 1f, 0f).y)
+            {
+                transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                enter = false;
+            }
+
+            if (!isOpen) break;
         }
     }
 
     private IEnumerator DoorOpen()
     {
-        if (isOpen) yield break;
-        yield return new WaitForFixedUpdate();
+        bool enter = true;
+        while (enter)
+        {
+            yield return waitForFixedUpdate;
 
-        nowDeg += objSpeed * Time.deltaTime * vector;
-        transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
-        if (Mathf.Abs(transform.localRotation.y) > Quaternion.Euler(0f, 89f, 0f).y)
-        {
-            transform.localRotation = Quaternion.Euler(0f, 90.0f * vector, 0f);
-        }
-        else
-        {
-            StartCoroutine(DoorOpen());
+            nowDeg += objSpeed * Time.deltaTime * vector;
+            transform.RotateAround(rotatePos.position, Vector3.up, nowDeg);
+
+            if (Mathf.Abs(transform.localRotation.y) > Quaternion.Euler(0f, 89f, 0f).y)
+            {
+                transform.localRotation = Quaternion.Euler(0f, 90.0f * vector, 0f);
+                enter = false;
+            }
+
+            if (isOpen) break;
         }
     }
 
@@ -93,26 +101,27 @@ public class DoorActionCS : MonoBehaviour, IAction
     {
         showTimer = 1;
         if (isShow) return;
-        if (GetComponent<MeshRenderer>() is not null)
+        if (meshRenderer is not null)
         {
             isShow = true;
-            GetComponent<MeshRenderer>().materials = new Material[2] { GetComponent<MeshRenderer>().material, outlineHighlight };
+            meshRenderer.materials = new Material[2] { meshRenderer.material, outlineHighlight };
             StartCoroutine(ShowCheck());
         }
     }
 
     private IEnumerator ShowCheck()
     {
-        showTimer -= 0.5f;
-        if (showTimer <= 0)
+        bool enter = true;
+        while(enter)
         {
-            isShow = false;
-            GetComponent<MeshRenderer>().materials = new Material[2] { GetComponent<MeshRenderer>().material, null };
-        }
-        yield return new WaitForSeconds(0.5f);
-        if (isShow)
-        {
-            StartCoroutine(ShowCheck());
+            yield return waitForFixedUpdate;
+            showTimer -= Time.deltaTime;
+            if (showTimer <= 0)
+            {
+                meshRenderer.materials = new Material[2] { meshRenderer.material, null };
+                isShow = false;
+                enter = false;
+            }
         }
     }
 
@@ -123,7 +132,6 @@ public class DoorActionCS : MonoBehaviour, IAction
 
         float crossProduct = v1.x * v2.z - v1.z * v2.x;
 
-        print(crossProduct);
         if (crossProduct >= 0)
         {
             vector = -1f;
